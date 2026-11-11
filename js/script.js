@@ -26,22 +26,36 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Cálculo do Vértice (Ponto Ótimo): Xv = -b / (2*a) e Yv = f(Xv)
+        // 1. Cálculo do Vértice (Ponto Ótimo)
         const xVértice = -b / (2 * a);
         const yVértice = (a * Math.pow(xVértice, 2)) + (b * xVértice) + c;
-        
-        // Identifica se é Máximo (a < 0) ou Mínimo (a > 0)
         const tipoOtimo = a < 0 ? "Ponto de Máximo" : "Ponto de Mínimo";
 
-        // Monta o texto base do resultado da otimização
+        // 2. Cálculo do Discriminante (Delta)
+        const delta = Math.pow(b, 2) - (4 * a * c);
+
+        // Monta o texto base do resultado
         let htmlResultado = `
             <strong>Resultado da Otimização:</strong><br>
             • Tipo: <strong>${tipoOtimo}</strong><br>
-            • Coordenada Ótima: x = ${xVértice.toFixed(2)}<br>
-            • Valor Ótimo f(x): ${yVértice.toFixed(2)}<br>
+            • Coordenada Ótima (Vértice): x = ${xVértice.toFixed(2)}, f(x) = ${yVértice.toFixed(2)}<br><br>
+            <strong>Análise do Discriminante (Delta):</strong><br>
+            • Delta ($\Delta$) = ${delta.toFixed(2)}<br>
         `;
 
-        // Se o usuário digitou um valor em x para avaliar a função naquele ponto específico
+        // Avaliação das raízes com base no Delta
+        if (delta > 0) {
+            const raiz1 = (-b + Math.sqrt(delta)) / (2 * a);
+            const raiz2 = (-b - Math.sqrt(delta)) / (2 * a);
+            htmlResultado += `• Raízes Reais: x₁ = ${raiz1.toFixed(2)} e x₂ = ${raiz2.toFixed(2)} (Cruza o eixo X em 2 pontos)<br>`;
+        } else if (delta === 0) {
+            const raizUnica = -b / (2 * a);
+            htmlResultado += `• Raiz Real Única: x = ${raizUnica.toFixed(2)} (Toca o eixo X no vértice)<br>`;
+        } else {
+            htmlResultado += `• Sem raízes reais (Não intercepta o eixo X)<br>`;
+        }
+
+        // 3. Se o usuário digitou um valor em x para avaliar a função especificamente
         const valorX = inputX.value.trim();
         if (valorX !== "") {
             const xDesejado = parseFloat(valorX);
