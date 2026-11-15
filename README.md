@@ -45,3 +45,8 @@ Antes de executar o projeto na sua máquina, certifique-se de ter instalado:
 * Em seguida, se desejar saber o valor da função para um dado valor de x, basta incluir esse valor no quarto campo que calcula o valor de f(x) dado um valor de x (esse campo não é obrigatório).
 
 * Logo abaixo do quarto campo, após o preenchimento, você deve clicar no botão Calcular Otimização. O resultado com todas as informações listadas, aparecerá logo abaixo do botão de calcular.
+
+## 💻 Alunos
+
+* Anderson Nobre.
+* Winston Athie da Costa.
